@@ -1,7 +1,9 @@
-from .datasets.api import MetaData
+from college_scorecard import MetaData
+print(MetaData().get_attribute_names())
+class DatasetInfo():
 
-def print_dataset_info():
-    dataset_info = MetaData()
-    print('Attributes:\n', dataset_info.get_attribute_names())
+    def __init__(self):
+        _dataset_info = MetaData()
 
-print_dataset_info()
+    def print_attributes(self):
+        print('Attributes:\n', self._dataset_info.get_attribute_names())

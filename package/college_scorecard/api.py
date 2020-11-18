@@ -23,7 +23,7 @@ class Dataset():
 
 class MetaData():
 
-    def __init__(self, path='datasets/college_scorecard_data_dictionary.csv'):
+    def __init__(self, path='college_scorecard/college_scorecard_data_dictionary.csv'):
         self._dataset = pd.read_csv(path)
 
     def get_attribute_names(self):

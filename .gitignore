@@ -4,3 +4,5 @@ notebooks/.ipynb_checkpoints/
 analysis/__pycache__/
 package/__pychache__/
 package/datasets/__pycache__/
+package/__pycache__/
+echo package/college_scorecard/__pycache__/
