@@ -24,8 +24,8 @@ class Dataset():
 class MetaData():
 
     def __init__(self):
-        self.dataset = pd.read_csv(
+        self._dataset = pd.read_csv(
             '../datasets/college_scorecard_data_dictionary.csv')
 
-    def get_attributes(self):
-        return self._meta_data['developer_friendly_name']
+    def get_attribute_names(self):
+        return self._dataset['developer_friendly_name']
