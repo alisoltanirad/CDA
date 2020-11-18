@@ -2,3 +2,5 @@
 .idea/
 notebooks/.ipynb_checkpoints/
 analysis/__pycache__/
+package/__pychache__/
+package/datasets/__pycache__/

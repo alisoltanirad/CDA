@@ -1,10 +1,10 @@
+# Data source: College Scorecard
 import pandas as pd
 
 class Dataset():
 
     def __init__(self):
-        self._dataset = pd.read_csv('../datasets/college_scorecard.csv',
-                                    dtype='unicode')
+        self._dataset = pd.read_csv('college_scorecard.csv', dtype='unicode')
         self._meta = MetaData()
 
     def highest_degrees(self):
@@ -23,9 +23,8 @@ class Dataset():
 
 class MetaData():
 
-    def __init__(self):
-        self._dataset = pd.read_csv(
-            '../datasets/college_scorecard_data_dictionary.csv')
+    def __init__(self, path='datasets/college_scorecard_data_dictionary.csv'):
+        self._dataset = pd.read_csv(path)
 
     def get_attribute_names(self):
         return self._dataset['developer_friendly_name']
