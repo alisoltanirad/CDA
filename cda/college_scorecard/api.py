@@ -20,7 +20,7 @@ class Dataset():
         }
         college_names = self._dataset['instnm']
         highest_degrees = [degree[key] for key in self._dataset['highdeg']]
-        data = {'Name': college_names, 'Highest Degree': highest_degrees}
+        data = {'Name': college_names, 'Highest-Degree': highest_degrees}
         return pd.DataFrame(data)
 
 

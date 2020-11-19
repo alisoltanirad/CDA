@@ -1,3 +1,3 @@
-from cda import DatasetInfo
+from cda import DegreeInfo
 
-DatasetInfo().print_attributes()
+DegreeInfo().plot_highest_degrees()
