@@ -1,11 +1,14 @@
 # Data source: College Scorecard
+import ssl
 import pandas as pd
 
 class Dataset():
 
-    def __init__(self):
-        self._dataset = pd.read_csv('college_scorecard.csv', dtype='unicode')
-        self._meta = MetaData()
+    def __init__(self, path='https://raw.githubusercontent.com/alisoltanirad/'
+                            'CDA/main/cda/college_scorecard/'
+                            'college_scorecard.csv'):
+        ssl._create_default_https_context = ssl._create_unverified_context
+        self._dataset = pd.read_csv(path, dtype='unicode')
 
     def highest_degrees(self):
         degree = {
@@ -23,7 +26,10 @@ class Dataset():
 
 class MetaData():
 
-    def __init__(self, path='college_scorecard/college_scorecard_data_dictionary.csv'):
+    def __init__(self, path='https://raw.githubusercontent.com/alisoltanirad/'
+                            'CDA/main/cda/college_scorecard/'
+                            'college_scorecard_data_dictionary.csv'):
+        ssl._create_default_https_context = ssl._create_unverified_context
         self._dataset = pd.read_csv(path)
 
     def get_attribute_names(self):

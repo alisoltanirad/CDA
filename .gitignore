@@ -6,3 +6,5 @@ package/__pychache__/
 package/datasets/__pycache__/
 package/__pycache__/
 echo package/college_scorecard/__pycache__/
+cda/__pycache__/
+cda/college_scorecard/__pycache__/

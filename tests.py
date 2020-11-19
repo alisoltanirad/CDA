@@ -1,3 +1,3 @@
-from package import DatasetInfo
+from cda import DatasetInfo
 
 DatasetInfo().print_attributes()

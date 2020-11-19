@@ -1,5 +1,5 @@
-from college_scorecard import MetaData
-print(MetaData().get_attribute_names())
+from .college_scorecard import MetaData
+
 class DatasetInfo():
 
     def __init__(self):
