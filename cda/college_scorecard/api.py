@@ -10,6 +10,14 @@ class Dataset():
         ssl._create_default_https_context = ssl._create_unverified_context
         self._dataset = pd.read_csv(path, dtype='unicode')
 
+    def evaluation_metrics(self):
+        college_names = self._dataset['instnm']
+        admission_rates = self._dataset['adm_rate']
+        sat_scores = self._dataset['sat_avg']
+        completion_rate_4yr = self._dataset['c150_4']
+        completion_rate_less_than_4yr = self._dataset['c150_l4']
+        #completion_rate_avg = list_average()
+
     def highest_degrees(self):
         degree = {
             '0': "Non-degree-granting",
