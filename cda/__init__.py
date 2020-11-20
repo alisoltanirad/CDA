@@ -1,2 +1,2 @@
-from .dataset_info import DatasetInfo
+from .college_evaluation import CollegeEvaluation
 from .degree_info import DegreeInfo

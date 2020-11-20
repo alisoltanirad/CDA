@@ -1,3 +1,3 @@
-from cda import DegreeInfo
+from cda import CollegeEvaluation
 
-DegreeInfo().plot_highest_degrees()
+CollegeEvaluation().show_evaluation_metrics()

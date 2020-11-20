@@ -31,7 +31,7 @@ class Dataset():
             'Completion-Rate-Overall': completion_rate_avg,
             'SAT-Scores-Overall': sat_scores,
         }
-        return data
+        return pd.DataFrame(data)
 
     def highest_degrees(self):
         degree = {

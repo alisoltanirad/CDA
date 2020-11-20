@@ -4,7 +4,7 @@ from .college_scorecard import Dataset
 class DegreeInfo():
 
     def __init__(self):
-        self._dataset = Dataset(path='cda/college_scorecard/college_scorecard.csv')
+        self._dataset = Dataset()
 
     def plot_highest_degrees(self):
         data = self._dataset.highest_degrees()['Highest-Degree'].value_counts()
