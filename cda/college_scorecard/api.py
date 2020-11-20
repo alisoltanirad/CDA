@@ -1,6 +1,7 @@
 # Data source: College Scorecard
 import ssl
 import pandas as pd
+from .data_processing import list_average
 
 class Dataset():
 
@@ -14,9 +15,17 @@ class Dataset():
         college_names = self._dataset['instnm']
         admission_rates = self._dataset['adm_rate']
         sat_scores = self._dataset['sat_avg']
-        completion_rate_4yr = self._dataset['c150_4']
-        completion_rate_less_than_4yr = self._dataset['c150_l4']
-        #completion_rate_avg = list_average()
+        completion_2yr = self._dataset['overall_yr2_n']
+        completion_3yr = self._dataset['overall_yr3_n']
+        completion_4yr = self._dataset['overall_yr4_n']
+        completion_6yr = self._dataset['overall_yr6_n']
+        completion_8yr = self._dataset['overall_yr8_n']
+        completion_rate_avg = list_average([
+            completion_2yr, completion_3yr, completion_4yr,
+            completion_6yr, completion_8yr
+        ])
+        
+
 
     def highest_degrees(self):
         degree = {
