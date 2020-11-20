@@ -14,18 +14,24 @@ class Dataset():
     def evaluation_metrics(self):
         college_names = self._dataset['instnm']
         admission_rates = self._dataset['adm_rate']
-        sat_scores = self._dataset['sat_avg']
         completion_2yr = self._dataset['overall_yr2_n']
         completion_3yr = self._dataset['overall_yr3_n']
         completion_4yr = self._dataset['overall_yr4_n']
         completion_6yr = self._dataset['overall_yr6_n']
         completion_8yr = self._dataset['overall_yr8_n']
         completion_rate_avg = list_average([
-            completion_2yr, completion_3yr, completion_4yr,
-            completion_6yr, completion_8yr
+            completion_2yr, completion_3yr, completion_4yr, completion_6yr,
+            completion_8yr
         ])
-        
+        sat_scores = self._dataset['sat_avg']
 
+        data = {
+            'Name': college_names,
+            'Admission-Rate': admission_rates,
+            'Completion-Rate-Overall': completion_rate_avg,
+            'SAT-Scores-Overall': sat_scores,
+        }
+        return data
 
     def highest_degrees(self):
         degree = {
