@@ -1,3 +1,3 @@
-from cda import CollegeEvaluation
+from cda import CostInfo
 
-CollegeEvaluation().show_evaluation_metrics()
+CostInfo().show_costs()
