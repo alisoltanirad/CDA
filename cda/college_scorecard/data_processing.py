@@ -7,3 +7,12 @@ def list_average(lists):
             avg_list[i] += lists[j][i]
         avg_list[i] /= n_lists
     return avg_list
+
+
+def ownership_types(keys):
+    ownership_type = {
+        '1': 'public',
+        '2': 'private',
+        '3': 'private',
+    }
+    return [ownership_type[key] for key in keys]

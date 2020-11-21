@@ -1,7 +1,7 @@
 # Data source: College Scorecard
 import ssl
 import pandas as pd
-from .data_processing import list_average
+from .data_processing import list_average, ownership_types
 
 class Dataset():
 
@@ -48,12 +48,7 @@ class Dataset():
 
     def costs(self):
         college_names = self._dataset['instnm']
-        ownership_type = {
-            '1': 'public',
-            '2': 'private',
-            '3': 'private',
-        }
-        ownership = [ownership_type[key] for key in self._dataset['control']]
+        ownership = ownership_types(self._dataset['control'])
         net_price_public = self._dataset['npt4_pub']
         net_price_private = self._dataset['npt4_priv']
         attendance_cost = self._dataset['costt4_a']
@@ -73,12 +68,7 @@ class Dataset():
 
     def financial_aids(self):
         college_names = self._dataset['instnm']
-        ownership_type = {
-            '1': 'public',
-            '2': 'private',
-            '3': 'private',
-        }
-        ownership = [ownership_type[key] for key in self._dataset['control']]
+        ownership = ownership_types(self._dataset['control'])
         federal_loan_rate = self._dataset['pctfloan']
         #x = self._dataset['num4_pub'] or self._dataset['num4_priv']
         a = self._dataset['num4_pub']
@@ -92,6 +82,7 @@ class Dataset():
 
         data = {
             #'Name': college_names,
+            'Ownership': ownership,
             #'Federal_Loan_Rate': federal_loan_rate,
             'x': x,
         }
