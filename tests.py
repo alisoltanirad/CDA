@@ -1,3 +1,3 @@
-from cda import CostInfo
+from cda import AidInfo
 
-CostInfo().show_costs()
+AidInfo().show_financial_aids()
