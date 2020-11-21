@@ -46,6 +46,16 @@ class Dataset():
         data = {'Name': college_names, 'Highest-Degree': highest_degrees}
         return pd.DataFrame(data)
 
+    def costs(self):
+        net_price_public = self._dataset['npt4_pub']
+        net_price_private = self._dataset['npt4_priv']
+
+        data = {
+            'Net_Price_Public': net_price_public,
+            'Net_Price_Private': net_price_private,
+        }
+        return pd.DataFrame(data)
+
 
 class MetaData():
 
