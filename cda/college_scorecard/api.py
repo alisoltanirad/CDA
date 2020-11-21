@@ -27,9 +27,9 @@ class Dataset():
 
         data = {
             'Name': college_names,
-            'Admission-Rate': admission_rates,
-            'Completion-Rate-Overall': completion_rate_avg,
-            'SAT-Scores-Overall': sat_scores,
+            'Admission_Rate': admission_rates,
+            'Completion_Rate_Overall': completion_rate_avg,
+            'SAT_Scores_Overall': sat_scores,
         }
         return pd.DataFrame(data)
 
@@ -43,7 +43,7 @@ class Dataset():
             '4': "Graduate degree",
         }
         highest_degrees = [degree[key] for key in self._dataset['highdeg']]
-        data = {'Name': college_names, 'Highest-Degree': highest_degrees}
+        data = {'Name': college_names, 'Highest_Degree': highest_degrees}
         return pd.DataFrame(data)
 
     def costs(self):
@@ -68,6 +68,14 @@ class Dataset():
             'Attendance_Cost': attendance_cost,
             'Tuition_In_State': tuition_in_state,
             'Tuition_Out_State': tuition_out_state,
+        }
+        return pd.DataFrame(data)
+
+    def financial_aids(self):
+        college_names = self._dataset['instnm']
+
+        data = {
+            'Name': college_names,
         }
         return pd.DataFrame(data)
 
