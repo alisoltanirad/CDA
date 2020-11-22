@@ -1,7 +1,7 @@
 # Data source: College Scorecard
 import ssl
 import pandas as pd
-from .data_processing import list_average, ownership_types
+from .data_processing import *
 
 class Dataset():
 
@@ -35,14 +35,7 @@ class Dataset():
 
     def highest_degrees(self):
         college_names = self._dataset['instnm']
-        degree = {
-            '0': "Non-degree-granting",
-            '1': "Certificate degree",
-            '2': "Associate degree",
-            '3': "Bachelor's degree",
-            '4': "Graduate degree",
-        }
-        highest_degrees = [degree[key] for key in self._dataset['highdeg']]
+        highest_degrees = degree_types(self._dataset['highdeg'])
         data = {'Name': college_names, 'Highest_Degree': highest_degrees}
         return pd.DataFrame(data)
 
