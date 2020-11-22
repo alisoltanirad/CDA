@@ -64,20 +64,17 @@ class Dataset():
         ownership = ownership_types(self._dataset['control'])
         federal_loan_rate = self._dataset['pctfloan']
         #x = self._dataset['num4_pub'] or self._dataset['num4_priv']
-        a = self._dataset['num4_pub']
-        b = self._dataset['num4_priv']
-        x = [0 for i in range(len(a))]
-        for i in range(len(a)):
-            if ownership[i] == 'public':
-                x[i] = a[i]
-            else:
-                x[i] = b[i]
+        title_iv = list_merge(
+            self._dataset['num4_pub'],
+            self._dataset['num4_priv'],
+            ownership
+        )
 
         data = {
             #'Name': college_names,
-            'Ownership': ownership,
+            #'Ownership': ownership,
             #'Federal_Loan_Rate': federal_loan_rate,
-            'x': x,
+            #'Title_IV': title_iv,
         }
         return pd.DataFrame(data)
 

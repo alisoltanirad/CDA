@@ -9,6 +9,17 @@ def list_average(lists):
     return avg_list
 
 
+def list_merge(public, private, ownership):
+    list_length = len(public)
+    merged_list = [None for i in range(list_length)]
+    for i in range(list_length):
+        if ownership[i] == ('public' or '1'):
+            merged_list[i] = public[i]
+        else:
+            merged_list[i] = private[i]
+    return merged_list
+
+
 def degree_types(keys):
     degree_type = {
         '0': "Non-degree-granting",
