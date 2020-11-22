@@ -1,6 +1,11 @@
 # Data source: College Scorecard
 import ssl
+from typing import Any, Union
+
 import pandas as pd
+from pandas import Series, DataFrame
+from pandas.core.generic import NDFrame
+
 from .data_processing import *
 
 class Dataset():
@@ -62,19 +67,32 @@ class Dataset():
     def financial_aids(self):
         college_names = self._dataset['instnm']
         ownership = ownership_types(self._dataset['control'])
-        federal_loan_rate = self._dataset['pctfloan']
-        #x = self._dataset['num4_pub'] or self._dataset['num4_priv']
         title_iv = list_merge(
             self._dataset['num4_pub'],
             self._dataset['num4_priv'],
             ownership
         )
+        federal_loan_rate = self._dataset['pctfloan']
+        debt_overall = self._dataset['debt_mdn_supp']
+        debt_completers = self._dataset['grad_debt_mdn']
+        debt_noncompleters = self._dataset['wdraw_debt_mdn']
+        debt_dependent = self._dataset['dep_debt_mdn']
+        debt_independent = self._dataset['ind_debt_mdn']
+        family_income_dependent = self._dataset['dep_inc_n']
+        family_income_independent = self._dataset['ind_inc_n']
 
         data = {
-            #'Name': college_names,
-            #'Ownership': ownership,
-            #'Federal_Loan_Rate': federal_loan_rate,
-            #'Title_IV': title_iv,
+            'Name': college_names,
+            'Ownership': ownership,
+            'Title_IV': title_iv,
+            'Federal_Loan_Rate': federal_loan_rate,
+            'Debt_Overall': debt_overall,
+            'Debt_Completers': debt_completers,
+            'Debt_NonCompleters': debt_noncompleters,
+            'Debt_Dependent': debt_dependent,
+            'Debt_Independent': debt_independent,
+            'Family_Income_Dependent': family_income_dependent,
+            'Family_Income_Independent': family_income_independent,
         }
         return pd.DataFrame(data)
 
