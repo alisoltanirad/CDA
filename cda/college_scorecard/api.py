@@ -53,6 +53,15 @@ class Dataset():
         return pd.DataFrame(data)
 
 
+    def programs(self):
+        college_names = self._dataset['instnm']
+
+        data = {
+            'Name': college_names,
+        }
+        return pd.DataFrame(data)
+
+
     def costs(self):
         college_names = self._dataset['instnm']
         ownership = ownership_types(self._dataset['control'])
