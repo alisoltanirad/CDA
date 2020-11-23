@@ -14,11 +14,15 @@ class Dataset():
 
     def colleges(self):
         college_names = self._dataset['instnm']
+        ownership = ownership_types(self._dataset['control'])
+        student_size = self._dataset['ugds']
         online_only = self._dataset['distanceonly']
 
         data = {
             'Name': college_names,
-            'Is_Online_Only': online_only
+            'Ownership': ownership,
+            'Student_Size': student_size,
+            'Is_Online_Only': online_only,
         }
         return pd.DataFrame(data)
 
