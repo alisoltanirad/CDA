@@ -1,3 +1,1 @@
-from cda import AidInfo
-
-AidInfo().show_financial_aids()
+from cda import *

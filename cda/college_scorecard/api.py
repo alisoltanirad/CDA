@@ -1,11 +1,6 @@
 # Data source: College Scorecard
 import ssl
-from typing import Any, Union
-
 import pandas as pd
-from pandas import Series, DataFrame
-from pandas.core.generic import NDFrame
-
 from .data_processing import *
 
 class Dataset():
@@ -15,6 +10,18 @@ class Dataset():
                             'college_scorecard.csv'):
         ssl._create_default_https_context = ssl._create_unverified_context
         self._dataset = pd.read_csv(path, dtype='unicode')
+
+
+    def colleges(self):
+        college_names = self._dataset['instnm']
+        online_only = self._dataset['distanceonly']
+
+        data = {
+            'Name': college_names,
+            'Is_Online_Only': online_only
+        }
+        return pd.DataFrame(data)
+
 
     def evaluation_metrics(self):
         college_names = self._dataset['instnm']
@@ -38,11 +45,13 @@ class Dataset():
         }
         return pd.DataFrame(data)
 
+
     def highest_degrees(self):
         college_names = self._dataset['instnm']
         highest_degrees = degree_types(self._dataset['highdeg'])
         data = {'Name': college_names, 'Highest_Degree': highest_degrees}
         return pd.DataFrame(data)
+
 
     def costs(self):
         college_names = self._dataset['instnm']
@@ -63,6 +72,7 @@ class Dataset():
             'Tuition_Out_State': tuition_out_state,
         }
         return pd.DataFrame(data)
+
 
     def financial_aids(self):
         college_names = self._dataset['instnm']
