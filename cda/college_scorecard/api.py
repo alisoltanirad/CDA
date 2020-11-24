@@ -50,6 +50,37 @@ class Dataset():
         return pd.DataFrame(data)
 
 
+    def students(self):
+        college_names = self._dataset['instnm']
+        ownership = ownership_types(self._dataset['control'])
+        part_time_share = self._dataset['pptug_ef']
+        race_white = self._dataset['ugds_white']
+        race_black = self._dataset['ugds_white']
+        race_hispanic = self._dataset['ugds_hisp']
+        race_asian = self._dataset['ugds_asian']
+        race_aian = self._dataset['ugds_aian']
+        race_nhpi = self._dataset['ugds_nhpi']
+        race_mixed = self._dataset['ugds_2mor']
+        family_income_dependent = self._dataset['dep_inc_n']
+        family_income_independent = self._dataset['ind_inc_n']
+
+        data = {
+            'Name': college_names,
+            'Ownership': ownership,
+            'Part_Time_Share': part_time_share,
+            'Race-White': race_white,
+            'Race-Black': race_black,
+            'Race-Hispanic': race_hispanic,
+            'Race-Asian': race_asian,
+            'Race-AIAN': race_aian,
+            'Race-NHPI': race_nhpi,
+            'Race-Mixed': race_mixed,
+            'Family_Income_Dependent': family_income_dependent,
+            'Family_Income_Independent': family_income_independent,
+        }
+        return pd.DataFrame(data)
+
+
     def highest_degrees(self):
         college_names = self._dataset['instnm']
         highest_degrees = degree_types(self._dataset['highdeg'])
