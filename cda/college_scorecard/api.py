@@ -25,16 +25,16 @@ class Dataset():
         faculty_fulltime_rate = self._dataset['pftfac']
 
         data = {
-            #'Name': college_names,
-            #'Ownership': ownership,
-            #'State': state,
-            #'Student_Size': student_size,
-            #'Is_Online_Only': online_only,
-            #   'Is_For_Profit': for_profit,
-            #'Tuition_Revenue': tuition_revenue,
-            #'Instructional_Expenditure': instructional_expenditure,
-            #'Faculty_Salary': faculty_salary,
-            #'Faculty_Full_Time_Rate': faculty_fulltime_rate,
+            'Name': college_names,
+            'Ownership': ownership,
+            'State': state,
+            'Student_Size': student_size,
+            'Is_Online_Only': online_only,
+            'Is_For_Profit': for_profit,
+            'Tuition_Revenue': tuition_revenue,
+            'Instructional_Expenditure': instructional_expenditure,
+            'Faculty_Salary': faculty_salary,
+            'Faculty_Full_Time_Rate': faculty_fulltime_rate,
         }
         return pd.DataFrame(data)
 

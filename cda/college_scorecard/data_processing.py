@@ -38,3 +38,12 @@ def ownership_types(keys):
         '3': 'private',
     }
     return [ownership_type[key] for key in keys]
+
+
+def is_for_profit(keys):
+    is_for_profit = {
+        '1': False,
+        '2': False,
+        '3': True,
+    }
+    return [is_for_profit[key] for key in keys]
