@@ -15,14 +15,26 @@ class Dataset():
     def colleges(self):
         college_names = self._dataset['instnm']
         ownership = ownership_types(self._dataset['control'])
+        state = self._dataset['stabbr']
         student_size = self._dataset['ugds']
         online_only = self._dataset['distanceonly']
+        for_profit = is_for_profit(self._dataset['control'])
+        tuition_revenue = self._dataset['tuitfte']
+        instructional_expenditure = self._dataset['inexpfte']
+        faculty_salary = self._dataset['avgfacsal']
+        faculty_fulltime_rate = self._dataset['pftfac']
 
         data = {
-            'Name': college_names,
-            'Ownership': ownership,
-            'Student_Size': student_size,
-            'Is_Online_Only': online_only,
+            #'Name': college_names,
+            #'Ownership': ownership,
+            #'State': state,
+            #'Student_Size': student_size,
+            #'Is_Online_Only': online_only,
+            #   'Is_For_Profit': for_profit,
+            #'Tuition_Revenue': tuition_revenue,
+            #'Instructional_Expenditure': instructional_expenditure,
+            #'Faculty_Salary': faculty_salary,
+            #'Faculty_Full_Time_Rate': faculty_fulltime_rate,
         }
         return pd.DataFrame(data)
 
