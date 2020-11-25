@@ -10,7 +10,7 @@ class CollegeInfo():
         print(self._data)
 
     def plot_highest_degrees(self):
-        data = self._data.colleges()['Highest_Degree'].value_counts()
+        data = self._data['Highest_Degree'].value_counts()
 
         degrees, numbers = [], []
         for degree, number in data.items():
