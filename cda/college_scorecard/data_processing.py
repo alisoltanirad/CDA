@@ -40,6 +40,17 @@ def ownership_types(keys):
     return [ownership_type[key] for key in keys]
 
 
+def is_religious_affiliate(keys):
+    is_religious_affiliate = [False for i in range(len(keys))]
+    for i in range(len(keys)):
+        try:
+            if (int(keys[i]) > 0):
+                is_religious_affiliate[i] = True
+        except:
+            pass
+    return is_religious_affiliate
+
+
 def is_for_profit(keys):
     is_for_profit = {
         '1': False,
