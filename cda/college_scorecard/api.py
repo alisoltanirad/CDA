@@ -10,11 +10,11 @@ class Dataset():
                             'college_scorecard.csv'):
         ssl._create_default_https_context = ssl._create_unverified_context
         self._dataset = pd.read_csv(path, dtype='unicode')
+        self.college_names = self._dataset['instnm']
+        self.ownership = ownership_types(self._dataset['control'])
 
 
     def colleges(self):
-        college_names = self._dataset['instnm']
-        ownership = ownership_types(self._dataset['control'])
         state = self._dataset['stabbr']
         student_size = self._dataset['ugds']
         online_only = self._dataset['distanceonly']
@@ -28,8 +28,8 @@ class Dataset():
         faculty_fulltime_rate = self._dataset['pftfac']
 
         data = {
-            'Name': college_names,
-            'Ownership': ownership,
+            'Name': self.college_names,
+            'Ownership': self.ownership,
             'State': state,
             'Student_Size': student_size,
             'Is_Online_Only': online_only,
@@ -46,7 +46,6 @@ class Dataset():
 
 
     def evaluation_metrics(self):
-        college_names = self._dataset['instnm']
         admission_rates = self._dataset['adm_rate']
         completion_2yr = self._dataset['overall_yr2_n']
         completion_3yr = self._dataset['overall_yr3_n']
@@ -60,7 +59,7 @@ class Dataset():
         sat_scores = self._dataset['sat_avg']
 
         data = {
-            'Name': college_names,
+            'Name': self.college_names,
             'Admission_Rate': admission_rates,
             'Completion_Rate_Overall': completion_rate_avg,
             'SAT_Scores_Overall': sat_scores,
@@ -69,8 +68,6 @@ class Dataset():
 
 
     def students(self):
-        college_names = self._dataset['instnm']
-        ownership = ownership_types(self._dataset['control'])
         part_time_share = self._dataset['pptug_ef']
         race_white = self._dataset['ugds_white']
         race_black = self._dataset['ugds_white']
@@ -83,8 +80,8 @@ class Dataset():
         family_income_independent = self._dataset['ind_inc_n']
 
         data = {
-            'Name': college_names,
-            'Ownership': ownership,
+            'Name': self.college_names,
+            'Ownership': self.ownership,
             'Part_Time_Share': part_time_share,
             'Race-White': race_white,
             'Race-Black': race_black,
@@ -100,24 +97,19 @@ class Dataset():
 
 
     def highest_degrees(self):
-        college_names = self._dataset['instnm']
         highest_degrees = degree_types(self._dataset['highdeg'])
-        data = {'Name': college_names, 'Highest_Degree': highest_degrees}
+        data = {'Name': self.college_names, 'Highest_Degree': highest_degrees}
         return pd.DataFrame(data)
 
 
     def programs(self):
-        college_names = self._dataset['instnm']
-
         data = {
-            'Name': college_names,
+            'Name': self.college_names,
         }
         return pd.DataFrame(data)
 
 
     def costs(self):
-        college_names = self._dataset['instnm']
-        ownership = ownership_types(self._dataset['control'])
         net_price_public = self._dataset['npt4_pub']
         net_price_private = self._dataset['npt4_priv']
         attendance_cost = self._dataset['costt4_a']
@@ -125,8 +117,8 @@ class Dataset():
         tuition_out_state = self._dataset['tuitionfee_out']
 
         data = {
-            'Name': college_names,
-            'Ownership': ownership,
+            'Name': self.college_names,
+            'Ownership': self.ownership,
             'Net_Price_Public': net_price_public,
             'Net_Price_Private': net_price_private,
             'Attendance_Cost': attendance_cost,
@@ -137,12 +129,10 @@ class Dataset():
 
 
     def financial_aids(self):
-        college_names = self._dataset['instnm']
-        ownership = ownership_types(self._dataset['control'])
         title_iv = list_merge(
             self._dataset['num4_pub'],
             self._dataset['num4_priv'],
-            ownership
+            self.ownership
         )
         federal_loan_rate = self._dataset['pctfloan']
         debt_overall = self._dataset['debt_mdn_supp']
@@ -154,8 +144,8 @@ class Dataset():
         family_income_independent = self._dataset['ind_inc_n']
 
         data = {
-            'Name': college_names,
-            'Ownership': ownership,
+            'Name': self.college_names,
+            'Ownership': self.ownership,
             'Title_IV': title_iv,
             'Federal_Loan_Rate': federal_loan_rate,
             'Debt_Overall': debt_overall,
