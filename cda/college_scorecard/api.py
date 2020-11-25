@@ -100,14 +100,7 @@ class Dataset():
         highest_degrees = degree_types(self._dataset['highdeg'])
         data = {'Name': self.college_names, 'Highest_Degree': highest_degrees}
         return pd.DataFrame(data)
-
-
-    def programs(self):
-        data = {
-            'Name': self.college_names,
-        }
-        return pd.DataFrame(data)
-
+    
 
     def costs(self):
         net_price_public = self._dataset['npt4_pub']
