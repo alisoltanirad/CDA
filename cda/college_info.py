@@ -4,13 +4,13 @@ from .college_scorecard import Dataset
 class CollegeInfo():
 
     def __init__(self):
-        self._dataset = Dataset(path='cda/college_scorecard/college_scorecard.csv')
+        self._data = Dataset().colleges()
 
     def show_colleges_info(self):
-        print(self._dataset.colleges())
+        print(self._data)
 
     def plot_highest_degrees(self):
-        data = self._dataset.colleges()['Highest_Degree'].value_counts()
+        data = self._data.colleges()['Highest_Degree'].value_counts()
 
         degrees, numbers = [], []
         for degree, number in data.items():

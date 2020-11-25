@@ -3,7 +3,7 @@ from .college_scorecard.api import MetaData
 class DatasetInfo():
 
     def __init__(self):
-        self._dataset_info = MetaData()
+        self._data = MetaData()
 
-    def print_attributes(self):
-        print('Attributes:\n', self._dataset_info.get_attribute_names())
+    def show_attributes(self):
+        print('Attributes:\n', self._data.get_attribute_names())

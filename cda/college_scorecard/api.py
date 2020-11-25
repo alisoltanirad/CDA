@@ -3,7 +3,7 @@ import ssl
 import pandas as pd
 from .data_processing import *
 
-class Dataset():
+class Dataset:
 
     def __init__(self, path='https://raw.githubusercontent.com/alisoltanirad/'
                             'CDA/main/cda/college_scorecard/'
@@ -12,7 +12,6 @@ class Dataset():
         self._dataset = pd.read_csv(path, dtype='unicode')
         self.college_names = self._dataset['instnm']
         self.ownership = ownership_types(self._dataset['control'])
-
 
     def colleges(self):
         state = self._dataset['stabbr']
@@ -46,7 +45,6 @@ class Dataset():
         }
         return pd.DataFrame(data)
 
-
     def evaluation_metrics(self):
         admission_rates = self._dataset['adm_rate']
         completion_2yr = self._dataset['overall_yr2_n']
@@ -67,7 +65,6 @@ class Dataset():
             'SAT_Scores_Overall': sat_scores,
         }
         return pd.DataFrame(data)
-
 
     def students(self):
         part_time_share = self._dataset['pptug_ef']
@@ -97,7 +94,6 @@ class Dataset():
         }
         return pd.DataFrame(data)
 
-
     def costs(self):
         net_price_public = self._dataset['npt4_pub']
         net_price_private = self._dataset['npt4_priv']
@@ -115,7 +111,6 @@ class Dataset():
             'Tuition_Out_State': tuition_out_state,
         }
         return pd.DataFrame(data)
-
 
     def financial_aids(self):
         title_iv = list_merge(
@@ -148,7 +143,7 @@ class Dataset():
         return pd.DataFrame(data)
 
 
-class MetaData():
+class MetaData:
 
     def __init__(self, path='https://raw.githubusercontent.com/alisoltanirad/'
                             'CDA/main/cda/college_scorecard/'
