@@ -18,6 +18,9 @@ class Dataset():
         state = self._dataset['stabbr']
         student_size = self._dataset['ugds']
         online_only = self._dataset['distanceonly']
+        men_only = self._dataset['menonly']
+        women_only = self._dataset['womenonly']
+        religious_affiliate = is_religious_affiliate(self._dataset['relaffil'])
         for_profit = is_for_profit(self._dataset['control'])
         tuition_revenue = self._dataset['tuitfte']
         instructional_expenditure = self._dataset['inexpfte']
@@ -25,18 +28,21 @@ class Dataset():
         faculty_fulltime_rate = self._dataset['pftfac']
 
         data = {
-            'Name': college_names,
-            'Ownership': ownership,
-            'State': state,
-            'Student_Size': student_size,
-            'Is_Online_Only': online_only,
-            'Is_For_Profit': for_profit,
-            'Tuition_Revenue': tuition_revenue,
-            'Instructional_Expenditure': instructional_expenditure,
-            'Faculty_Salary': faculty_salary,
-            'Faculty_Full_Time_Rate': faculty_fulltime_rate,
+            #'Name': college_names,
+            #'Ownership': ownership,
+            #'State': state,
+            #'Student_Size': student_size,
+            #'Is_Online_Only': online_only,
+            #'Is_Men_Only': men_only,
+            #'Is_Women_Only': women_only,
+            'Is_Religious_Affiliate': religious_affiliate,
+            #'Is_For_Profit': for_profit,
+            #'Tuition_Revenue': tuition_revenue,
+            #'Instructional_Expenditure': instructional_expenditure,
+            #'Faculty_Salary': faculty_salary,
+            #'Faculty_Full_Time_Rate': faculty_fulltime_rate,
         }
-        return pd.DataFrame(data)
+        return pd.DataFrame(data).value_counts()
 
 
     def evaluation_metrics(self):
