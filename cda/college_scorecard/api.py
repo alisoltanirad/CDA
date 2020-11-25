@@ -26,6 +26,7 @@ class Dataset():
         instructional_expenditure = self._dataset['inexpfte']
         faculty_salary = self._dataset['avgfacsal']
         faculty_fulltime_rate = self._dataset['pftfac']
+        highest_degrees = degree_types(self._dataset['highdeg'])
 
         data = {
             'Name': self.college_names,
@@ -41,6 +42,7 @@ class Dataset():
             'Instructional_Expenditure': instructional_expenditure,
             'Faculty_Salary': faculty_salary,
             'Faculty_Full_Time_Rate': faculty_fulltime_rate,
+            'Highest_Degree': highest_degrees,
         }
         return pd.DataFrame(data)
 
@@ -95,12 +97,6 @@ class Dataset():
         }
         return pd.DataFrame(data)
 
-
-    def highest_degrees(self):
-        highest_degrees = degree_types(self._dataset['highdeg'])
-        data = {'Name': self.college_names, 'Highest_Degree': highest_degrees}
-        return pd.DataFrame(data)
-    
 
     def costs(self):
         net_price_public = self._dataset['npt4_pub']
