@@ -16,27 +16,6 @@ class Dataset:
             self._dataset['control']
         )
 
-    def evaluation_metrics(self):
-        admission_rates = self._dataset['adm_rate']
-        completion_2yr = self._dataset['overall_yr2_n']
-        completion_3yr = self._dataset['overall_yr3_n']
-        completion_4yr = self._dataset['overall_yr4_n']
-        completion_6yr = self._dataset['overall_yr6_n']
-        completion_8yr = self._dataset['overall_yr8_n']
-        completion_rate_avg = self._data_processor._list_average([
-            completion_2yr, completion_3yr, completion_4yr, completion_6yr,
-            completion_8yr
-        ])
-        sat_scores = self._dataset['sat_avg']
-
-        data = {
-            'Name': self.college_names,
-            'Admission_Rate': admission_rates,
-            'Completion_Rate_Overall': completion_rate_avg,
-            'SAT_Scores_Overall': sat_scores,
-        }
-        return pd.DataFrame(data)
-
     def students(self):
         part_time_share = self._dataset['pptug_ef']
         race_white = self._dataset['ugds_white']
@@ -123,7 +102,7 @@ class CollegeData(Dataset):
 
         self._set_general_info()
         self._set_fiscal_info()
-
+        self._set_evaluation_metrics()
 
     def get_info(self):
         data = {
@@ -141,6 +120,15 @@ class CollegeData(Dataset):
             'Faculty_Salary': self.faculty_salary,
             'Faculty_Full_Time_Rate': self.faculty_fulltime_rate,
             'Highest_Degree': self.highest_degrees,
+        }
+        return pd.DataFrame(data)
+
+    def get_evaluation_metrics(self):
+        data = {
+            'Name': self.college_names,
+            'Admission_Rate': self.admission_rates,
+            'Completion_Rate_Overall': self.completion_rate_avg,
+            'SAT_Scores_Overall': self.sat_scores,
         }
         return pd.DataFrame(data)
 
@@ -165,6 +153,19 @@ class CollegeData(Dataset):
         self.instructional_expenditure = self._dataset['inexpfte']
         self.faculty_salary = self._dataset['avgfacsal']
         self.faculty_fulltime_rate = self._dataset['pftfac']
+
+    def _set_evaluation_metrics(self):
+        self.admission_rates = self._dataset['adm_rate']
+        completion_2yr = self._dataset['overall_yr2_n']
+        completion_3yr = self._dataset['overall_yr3_n']
+        completion_4yr = self._dataset['overall_yr4_n']
+        completion_6yr = self._dataset['overall_yr6_n']
+        completion_8yr = self._dataset['overall_yr8_n']
+        self.completion_rate_avg = self._data_processor._list_average([
+            completion_2yr, completion_3yr, completion_4yr, completion_6yr,
+            completion_8yr
+        ])
+        self.sat_scores = self._dataset['sat_avg']
 
 
 class MetaData:
