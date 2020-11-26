@@ -1,10 +1,10 @@
 from matplotlib import pyplot as plt
-from .college_scorecard import Dataset
+from .college_scorecard import CollegeData
 
 class CollegeInfo():
 
     def __init__(self):
-        self._data = Dataset().colleges()
+        self._data = CollegeData().get_data()
 
     def show_colleges_info(self):
         print(self._data)

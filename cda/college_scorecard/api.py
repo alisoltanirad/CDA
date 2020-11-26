@@ -16,44 +16,6 @@ class Dataset:
             self._dataset['control']
         )
 
-    def colleges(self):
-        state = self._dataset['stabbr']
-        student_size = self._dataset['ugds']
-        online_only = self._dataset['distanceonly']
-        men_only = self._dataset['menonly']
-        women_only = self._dataset['womenonly']
-        religious_affiliate = self._data_processor._is_religious_affiliate(
-            self._dataset['relaffil']
-        )
-        for_profit = self._data_processor._is_for_profit(
-            self._dataset['control']
-        )
-        tuition_revenue = self._dataset['tuitfte']
-        instructional_expenditure = self._dataset['inexpfte']
-        faculty_salary = self._dataset['avgfacsal']
-        faculty_fulltime_rate = self._dataset['pftfac']
-        highest_degrees = self._data_processor._degree_types(
-            self._dataset['highdeg']
-        )
-
-        data = {
-            'Name': self.college_names,
-            'Ownership': self.ownership,
-            'State': state,
-            'Student_Size': student_size,
-            'Is_Online_Only': online_only,
-            'Is_Men_Only': men_only,
-            'Is_Women_Only': women_only,
-            'Is_Religious_Affiliate': religious_affiliate,
-            'Is_For_Profit': for_profit,
-            'Tuition_Revenue': tuition_revenue,
-            'Instructional_Expenditure': instructional_expenditure,
-            'Faculty_Salary': faculty_salary,
-            'Faculty_Full_Time_Rate': faculty_fulltime_rate,
-            'Highest_Degree': highest_degrees,
-        }
-        return pd.DataFrame(data)
-
     def evaluation_metrics(self):
         admission_rates = self._dataset['adm_rate']
         completion_2yr = self._dataset['overall_yr2_n']
@@ -148,6 +110,52 @@ class Dataset:
             'Debt_Independent': debt_independent,
             'Family_Income_Dependent': family_income_dependent,
             'Family_Income_Independent': family_income_independent,
+        }
+        return pd.DataFrame(data)
+
+
+class CollegeData(Dataset):
+
+    def __init__(self, path='https://raw.githubusercontent.com/alisoltanirad/'
+                            'CDA/main/cda/college_scorecard/'
+                            'college_scorecard.csv'):
+        Dataset.__init__(self, path)
+
+        self.state = self._dataset['stabbr']
+        self.student_size = self._dataset['ugds']
+        self.online_only = self._dataset['distanceonly']
+        self.men_only = self._dataset['menonly']
+        self.women_only = self._dataset['womenonly']
+        self.religious_affiliate = self._data_processor._is_religious_affiliate(
+            self._dataset['relaffil']
+        )
+        self.for_profit = self._data_processor._is_for_profit(
+            self._dataset['control']
+        )
+        self.tuition_revenue = self._dataset['tuitfte']
+        self.instructional_expenditure = self._dataset['inexpfte']
+        self.faculty_salary = self._dataset['avgfacsal']
+        self.faculty_fulltime_rate = self._dataset['pftfac']
+        self.highest_degrees = self._data_processor._degree_types(
+            self._dataset['highdeg']
+        )
+
+    def get_data(self):
+        data = {
+            'Name': self.college_names,
+            'Ownership': self.ownership,
+            'State': self.state,
+            'Student_Size': self.student_size,
+            'Is_Online_Only': self.online_only,
+            'Is_Men_Only': self.men_only,
+            'Is_Women_Only': self.women_only,
+            'Is_Religious_Affiliate': self.religious_affiliate,
+            'Is_For_Profit': self.for_profit,
+            'Tuition_Revenue': self.tuition_revenue,
+            'Instructional_Expenditure': self.instructional_expenditure,
+            'Faculty_Salary': self.faculty_salary,
+            'Faculty_Full_Time_Rate': self.faculty_fulltime_rate,
+            'Highest_Degree': self.highest_degrees,
         }
         return pd.DataFrame(data)
 
