@@ -1,17 +1,20 @@
 # Data source: College Scorecard
 import ssl
 import pandas as pd
-from .data_processing import CollegeScorecardData
+from .data_processing import DataProcessor
 
-class Dataset(CollegeScorecardData):
+class Dataset:
 
     def __init__(self, path='https://raw.githubusercontent.com/alisoltanirad/'
                             'CDA/main/cda/college_scorecard/'
                             'college_scorecard.csv'):
         ssl._create_default_https_context = ssl._create_unverified_context
         self._dataset = pd.read_csv(path, dtype='unicode')
+        self._data_processor = DataProcessor()
         self.college_names = self._dataset['instnm']
-        self.ownership = self._ownership_types(self._dataset['control'])
+        self.ownership = self._data_processor._ownership_types(
+            self._dataset['control']
+        )
 
     def colleges(self):
         state = self._dataset['stabbr']
@@ -19,14 +22,19 @@ class Dataset(CollegeScorecardData):
         online_only = self._dataset['distanceonly']
         men_only = self._dataset['menonly']
         women_only = self._dataset['womenonly']
-        religious_affiliate = self._is_religious_affiliate(
-            self._dataset['relaffil'])
-        for_profit = self._is_for_profit(self._dataset['control'])
+        religious_affiliate = self._data_processor._is_religious_affiliate(
+            self._dataset['relaffil']
+        )
+        for_profit = self._data_processor._is_for_profit(
+            self._dataset['control']
+        )
         tuition_revenue = self._dataset['tuitfte']
         instructional_expenditure = self._dataset['inexpfte']
         faculty_salary = self._dataset['avgfacsal']
         faculty_fulltime_rate = self._dataset['pftfac']
-        highest_degrees = self._degree_types(self._dataset['highdeg'])
+        highest_degrees = self._data_processor._degree_types(
+            self._dataset['highdeg']
+        )
 
         data = {
             'Name': self.college_names,
@@ -53,7 +61,7 @@ class Dataset(CollegeScorecardData):
         completion_4yr = self._dataset['overall_yr4_n']
         completion_6yr = self._dataset['overall_yr6_n']
         completion_8yr = self._dataset['overall_yr8_n']
-        completion_rate_avg = self._list_average([
+        completion_rate_avg = self._data_processor._list_average([
             completion_2yr, completion_3yr, completion_4yr, completion_6yr,
             completion_8yr
         ])
@@ -114,7 +122,7 @@ class Dataset(CollegeScorecardData):
         return pd.DataFrame(data)
 
     def financial_aids(self):
-        title_iv = self._list_merge(
+        title_iv = self._data_processor._list_merge(
             self._dataset['num4_pub'],
             self._dataset['num4_priv'],
             self.ownership

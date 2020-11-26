@@ -1,4 +1,4 @@
-class CollegeScorecardData:
+class DataProcessor:
 
     def _list_average(self, lists):
         n_lists = len(lists)
