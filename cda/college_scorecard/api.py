@@ -16,34 +16,6 @@ class Dataset:
             self._dataset['control']
         )
 
-    def students(self):
-        part_time_share = self._dataset['pptug_ef']
-        race_white = self._dataset['ugds_white']
-        race_black = self._dataset['ugds_white']
-        race_hispanic = self._dataset['ugds_hisp']
-        race_asian = self._dataset['ugds_asian']
-        race_aian = self._dataset['ugds_aian']
-        race_nhpi = self._dataset['ugds_nhpi']
-        race_mixed = self._dataset['ugds_2mor']
-        family_income_dependent = self._dataset['dep_inc_n']
-        family_income_independent = self._dataset['ind_inc_n']
-
-        data = {
-            'Name': self.college_names,
-            'Ownership': self.ownership,
-            'Part_Time_Share': part_time_share,
-            'Race-White': race_white,
-            'Race-Black': race_black,
-            'Race-Hispanic': race_hispanic,
-            'Race-Asian': race_asian,
-            'Race-AIAN': race_aian,
-            'Race-NHPI': race_nhpi,
-            'Race-Mixed': race_mixed,
-            'Family_Income_Dependent': family_income_dependent,
-            'Family_Income_Independent': family_income_independent,
-        }
-        return pd.DataFrame(data)
-
     def costs(self):
         net_price_public = self._dataset['npt4_pub']
         net_price_private = self._dataset['npt4_priv']
@@ -99,7 +71,6 @@ class CollegeData(Dataset):
                             'CDA/main/cda/college_scorecard/'
                             'college_scorecard.csv'):
         Dataset.__init__(self, path)
-
         self._set_general_info()
         self._set_fiscal_info()
         self._set_evaluation_metrics()
@@ -166,6 +137,50 @@ class CollegeData(Dataset):
             completion_8yr
         ])
         self.sat_scores = self._dataset['sat_avg']
+
+
+class StudentData(Dataset):
+
+    def __init__(self, path='https://raw.githubusercontent.com/alisoltanirad/'
+                            'CDA/main/cda/college_scorecard/'
+                            'college_scorecard.csv'):
+        Dataset.__init__(self, path)
+        self._set_general_info()
+        self._set_race_info()
+        self._set_family_info()
+
+    def get_info(self):
+        data = {
+            'Name': self.college_names,
+            'Ownership': self.ownership,
+            'Part_Time_Share': self.part_time_share,
+            'Race-White': self.race_white,
+            'Race-Black': self.race_black,
+            'Race-Hispanic': self.race_hispanic,
+            'Race-Asian': self.race_asian,
+            'Race-AIAN': self.race_aian,
+            'Race-NHPI': self.race_nhpi,
+            'Race-Mixed': self.race_mixed,
+            'Family_Income_Dependent': self.family_income_dependent,
+            'Family_Income_Independent': self.family_income_independent,
+        }
+        return pd.DataFrame(data)
+
+    def _set_general_info(self):
+        self.part_time_share = self._dataset['pptug_ef']
+
+    def _set_race_info(self):
+        self.race_white = self._dataset['ugds_white']
+        self.race_black = self._dataset['ugds_white']
+        self.race_hispanic = self._dataset['ugds_hisp']
+        self.race_asian = self._dataset['ugds_asian']
+        self.race_aian = self._dataset['ugds_aian']
+        self.race_nhpi = self._dataset['ugds_nhpi']
+        self.race_mixed = self._dataset['ugds_2mor']
+
+    def _set_family_info(self):
+        self.family_income_dependent = self._dataset['dep_inc_n']
+        self.family_income_independent = self._dataset['ind_inc_n']
 
 
 class MetaData:
