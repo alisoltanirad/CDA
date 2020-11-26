@@ -5,5 +5,5 @@ class StudentInfo():
     def __init__(self):
         self._data = StudentData().get_info()
 
-    def show_students_info(self):
+    def show_data(self):
         print(self._data)

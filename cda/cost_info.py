@@ -5,5 +5,5 @@ class CostInfo():
     def __init__(self):
         self._data = FinancialData().get_cost_info()
 
-    def show_costs(self):
+    def show_data(self):
         print(self._data)

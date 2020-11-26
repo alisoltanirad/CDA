@@ -6,7 +6,7 @@ class CollegeInfo():
     def __init__(self):
         self._data = CollegeData().get_info()
 
-    def show_colleges_info(self):
+    def show_data(self):
         print(self._data)
 
     def plot_highest_degrees(self):

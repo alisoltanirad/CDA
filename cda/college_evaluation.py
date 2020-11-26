@@ -5,5 +5,5 @@ class CollegeEvaluation():
     def __init__(self):
         self._data = CollegeData().get_evaluation_metrics()
 
-    def show_evaluation_metrics(self):
+    def show_metrics(self):
         print(self._data)
