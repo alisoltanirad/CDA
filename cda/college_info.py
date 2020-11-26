@@ -4,7 +4,7 @@ from .college_scorecard import CollegeData
 class CollegeInfo():
 
     def __init__(self):
-        self._data = CollegeData().get_data()
+        self._data = CollegeData().get_info()
 
     def show_colleges_info(self):
         print(self._data)

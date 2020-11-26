@@ -121,26 +121,11 @@ class CollegeData(Dataset):
                             'college_scorecard.csv'):
         Dataset.__init__(self, path)
 
-        self.state = self._dataset['stabbr']
-        self.student_size = self._dataset['ugds']
-        self.online_only = self._dataset['distanceonly']
-        self.men_only = self._dataset['menonly']
-        self.women_only = self._dataset['womenonly']
-        self.religious_affiliate = self._data_processor._is_religious_affiliate(
-            self._dataset['relaffil']
-        )
-        self.for_profit = self._data_processor._is_for_profit(
-            self._dataset['control']
-        )
-        self.tuition_revenue = self._dataset['tuitfte']
-        self.instructional_expenditure = self._dataset['inexpfte']
-        self.faculty_salary = self._dataset['avgfacsal']
-        self.faculty_fulltime_rate = self._dataset['pftfac']
-        self.highest_degrees = self._data_processor._degree_types(
-            self._dataset['highdeg']
-        )
+        self._set_general_info()
+        self._set_fiscal_info()
 
-    def get_data(self):
+
+    def get_info(self):
         data = {
             'Name': self.college_names,
             'Ownership': self.ownership,
@@ -158,6 +143,28 @@ class CollegeData(Dataset):
             'Highest_Degree': self.highest_degrees,
         }
         return pd.DataFrame(data)
+
+    def _set_general_info(self):
+        self.state = self._dataset['stabbr']
+        self.student_size = self._dataset['ugds']
+        self.online_only = self._dataset['distanceonly']
+        self.men_only = self._dataset['menonly']
+        self.women_only = self._dataset['womenonly']
+        self.religious_affiliate = self._data_processor._is_religious_affiliate(
+            self._dataset['relaffil']
+        )
+        self.for_profit = self._data_processor._is_for_profit(
+            self._dataset['control']
+        )
+        self.highest_degrees = self._data_processor._degree_types(
+            self._dataset['highdeg']
+        )
+
+    def _set_fiscal_info(self):
+        self.tuition_revenue = self._dataset['tuitfte']
+        self.instructional_expenditure = self._dataset['inexpfte']
+        self.faculty_salary = self._dataset['avgfacsal']
+        self.faculty_fulltime_rate = self._dataset['pftfac']
 
 
 class MetaData:
