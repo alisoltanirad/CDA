@@ -16,54 +16,6 @@ class Dataset:
             self._dataset['control']
         )
 
-    def costs(self):
-        net_price_public = self._dataset['npt4_pub']
-        net_price_private = self._dataset['npt4_priv']
-        attendance_cost = self._dataset['costt4_a']
-        tuition_in_state = self._dataset['tuitionfee_in']
-        tuition_out_state = self._dataset['tuitionfee_out']
-
-        data = {
-            'Name': self.college_names,
-            'Ownership': self.ownership,
-            'Net_Price_Public': net_price_public,
-            'Net_Price_Private': net_price_private,
-            'Attendance_Cost': attendance_cost,
-            'Tuition_In_State': tuition_in_state,
-            'Tuition_Out_State': tuition_out_state,
-        }
-        return pd.DataFrame(data)
-
-    def financial_aids(self):
-        title_iv = self._data_processor._list_merge(
-            self._dataset['num4_pub'],
-            self._dataset['num4_priv'],
-            self.ownership
-        )
-        federal_loan_rate = self._dataset['pctfloan']
-        debt_overall = self._dataset['debt_mdn_supp']
-        debt_completers = self._dataset['grad_debt_mdn']
-        debt_noncompleters = self._dataset['wdraw_debt_mdn']
-        debt_dependent = self._dataset['dep_debt_mdn']
-        debt_independent = self._dataset['ind_debt_mdn']
-        family_income_dependent = self._dataset['dep_inc_n']
-        family_income_independent = self._dataset['ind_inc_n']
-
-        data = {
-            'Name': self.college_names,
-            'Ownership': self.ownership,
-            'Title_IV': title_iv,
-            'Federal_Loan_Rate': federal_loan_rate,
-            'Debt_Overall': debt_overall,
-            'Debt_Completers': debt_completers,
-            'Debt_NonCompleters': debt_noncompleters,
-            'Debt_Dependent': debt_dependent,
-            'Debt_Independent': debt_independent,
-            'Family_Income_Dependent': family_income_dependent,
-            'Family_Income_Independent': family_income_independent,
-        }
-        return pd.DataFrame(data)
-
 
 class CollegeData(Dataset):
 
@@ -177,6 +129,69 @@ class StudentData(Dataset):
         self.race_aian = self._dataset['ugds_aian']
         self.race_nhpi = self._dataset['ugds_nhpi']
         self.race_mixed = self._dataset['ugds_2mor']
+
+    def _set_family_info(self):
+        self.family_income_dependent = self._dataset['dep_inc_n']
+        self.family_income_independent = self._dataset['ind_inc_n']
+
+
+class FinancialData(Dataset):
+
+    def __init__(self, path='https://raw.githubusercontent.com/alisoltanirad/'
+                            'CDA/main/cda/college_scorecard/'
+                            'college_scorecard.csv'):
+        Dataset.__init__(self, path)
+        self._set_cost_info()
+        self._set_aid_info()
+        self._set_family_info()
+
+    def get_cost_info(self):
+        data = {
+            'Name': self.college_names,
+            'Ownership': self.ownership,
+            'Net_Price_Public': self.net_price_public,
+            'Net_Price_Private': self.net_price_private,
+            'Attendance_Cost': self.attendance_cost,
+            'Tuition_In_State': self.tuition_in_state,
+            'Tuition_Out_State': self.tuition_out_state,
+        }
+        return pd.DataFrame(data)
+
+    def get_aid_info(self):
+        data = {
+            'Name': self.college_names,
+            'Ownership': self.ownership,
+            'Title_IV': self.title_iv,
+            'Federal_Loan_Rate': self.federal_loan_rate,
+            'Debt_Overall': self.debt_overall,
+            'Debt_Completers': self.debt_completers,
+            'Debt_NonCompleters': self.debt_noncompleters,
+            'Debt_Dependent': self.debt_dependent,
+            'Debt_Independent': self.debt_independent,
+            'Family_Income_Dependent': self.family_income_dependent,
+            'Family_Income_Independent': self.family_income_independent,
+        }
+        return pd.DataFrame(data)
+
+    def _set_cost_info(self):
+        self.net_price_public = self._dataset['npt4_pub']
+        self.net_price_private = self._dataset['npt4_priv']
+        self.attendance_cost = self._dataset['costt4_a']
+        self.tuition_in_state = self._dataset['tuitionfee_in']
+        self.tuition_out_state = self._dataset['tuitionfee_out']
+
+    def _set_aid_info(self):
+        self.title_iv = self._data_processor._list_merge(
+            self._dataset['num4_pub'],
+            self._dataset['num4_priv'],
+            self.ownership
+        )
+        self.federal_loan_rate = self._dataset['pctfloan']
+        self.debt_overall = self._dataset['debt_mdn_supp']
+        self.debt_completers = self._dataset['grad_debt_mdn']
+        self.debt_noncompleters = self._dataset['wdraw_debt_mdn']
+        self.debt_dependent = self._dataset['dep_debt_mdn']
+        self.debt_independent = self._dataset['ind_debt_mdn']
 
     def _set_family_info(self):
         self.family_income_dependent = self._dataset['dep_inc_n']
