@@ -106,13 +106,13 @@ class StudentData(Dataset):
             'Name': self.college_names,
             'Ownership': self.ownership,
             'Part_Time_Share': self.part_time_share,
-            'Race-White': self.race_white,
-            'Race-Black': self.race_black,
-            'Race-Hispanic': self.race_hispanic,
-            'Race-Asian': self.race_asian,
-            'Race-AIAN': self.race_aian,
-            'Race-NHPI': self.race_nhpi,
-            'Race-Mixed': self.race_mixed,
+            'Race_White': self.race_white,
+            'Race_Black': self.race_black,
+            'Race_Hispanic': self.race_hispanic,
+            'Race_Asian': self.race_asian,
+            'Race_AIAN': self.race_aian,
+            'Race_NHPI': self.race_nhpi,
+            'Race_Mixed': self.race_mixed,
             'Family_Income_Dependent': self.family_income_dependent,
             'Family_Income_Independent': self.family_income_independent,
         }
@@ -123,7 +123,7 @@ class StudentData(Dataset):
 
     def _set_race_info(self):
         self.race_white = self._dataset['ugds_white']
-        self.race_black = self._dataset['ugds_white']
+        self.race_black = self._dataset['ugds_black']
         self.race_hispanic = self._dataset['ugds_hisp']
         self.race_asian = self._dataset['ugds_asian']
         self.race_aian = self._dataset['ugds_aian']
