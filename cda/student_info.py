@@ -10,6 +10,14 @@ class StudentInfo():
         print(self._data)
 
     def plot_race_diversity(self):
+        categories, numbers = self._get_race_avg()
+
+        fig, ax = plt.subplots()
+        ax.bar(categories, numbers)
+        plt.title('Students Race Diversity')
+        plt.show()
+
+    def _get_race_avg(self):
         white = self._data['Race_White'].astype(float).mean() * 100
         black = self._data['Race_Black'].astype(float).mean() * 100
         hispanic = self._data['Race_Hispanic'].astype(float).mean() * 100
@@ -23,7 +31,4 @@ class StudentInfo():
         ]
         numbers = [white, black, hispanic, asian, aian, nhpi, mixed]
 
-        fig, ax = plt.subplots()
-        ax.bar(categories, numbers)
-        plt.title('Students Race Diversity')
-        plt.show()
+        return categories, numbers
