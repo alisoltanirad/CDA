@@ -21,7 +21,7 @@ class StudentInfo():
         categories, numbers = self._get_part_time_share_info()
 
         fig, ax = plt.subplots()
-        ax.pie(numbers, labels=categories, autopct='%1.1f%%', startangle=90)
+        ax.pie(numbers, labels=categories, autopct='%1.1f%%', explode=(0, 0.1))
         ax.axis('equal')
         plt.title('Students Race Diversity')
         plt.show()
