@@ -4,7 +4,7 @@ from .college_scorecard import StudentData
 class StudentInfo():
 
     def __init__(self):
-        self._data = StudentData('cda/college_scorecard/college_scorecard.csv').get_info()
+        self._data = StudentData().get_info()
 
     def show_data(self):
         print(self._data)
@@ -43,11 +43,10 @@ class StudentInfo():
         return categories, numbers
 
     def _get_part_time_share_info(self):
-        data = self._data['Part_Time_Share'].value_counts()
+        part_time = self._data['Part_Time_Share'].astype(float).mean() * 100
+        full_time = 100 - part_time
 
-        categories, numbers = [], []
-        for category, number in data.items():
-            categories.append(category)
-            numbers.append(number)
+        categories = ['Full-Time', 'Part-Time']
+        numbers = [full_time, part_time]
 
         return categories, numbers
