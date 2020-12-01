@@ -4,7 +4,7 @@ from .college_scorecard import StudentData
 class StudentInfo():
 
     def __init__(self):
-        self._data = StudentData().get_info()
+        self._data = StudentData('cda/college_scorecard/college_scorecard.csv').get_info()
 
     def show_data(self):
         print(self._data)
@@ -14,6 +14,15 @@ class StudentInfo():
 
         fig, ax = plt.subplots()
         ax.bar(categories, numbers)
+        plt.title('Students Race Diversity')
+        plt.show()
+
+    def plot_part_time_share(self):
+        categories, numbers = self._get_part_time_share_info()
+
+        fig, ax = plt.subplots()
+        ax.pie(numbers, labels=categories, autopct='%1.1f%%', startangle=90)
+        ax.axis('equal')
         plt.title('Students Race Diversity')
         plt.show()
 
@@ -30,5 +39,15 @@ class StudentInfo():
             'White', 'Black', 'Hispanic', 'Asian', 'AIAN', 'NHPI', 'Mixed'
         ]
         numbers = [white, black, hispanic, asian, aian, nhpi, mixed]
+
+        return categories, numbers
+
+    def _get_part_time_share_info(self):
+        data = self._data['Part_Time_Share'].value_counts()
+
+        categories, numbers = [], []
+        for category, number in data.items():
+            categories.append(category)
+            numbers.append(number)
 
         return categories, numbers
