@@ -1,3 +1,4 @@
+from matplotlib import pyplot as plt
 from .college_scorecard import FinancialData
 
 class CostInfo():
@@ -7,6 +8,15 @@ class CostInfo():
 
     def show_data(self):
         print(self._data)
+
+    def plot_net_price_avg(self):
+        categories, numbers = self._get_net_price_avg()
+
+        fig, ax = plt.subplots()
+        ax.bar(categories, numbers)
+        plt.title('Net Price\n (Avg. Attendance Cost Minus Avg. Financial Aid)')
+        plt.ylabel('$')
+        plt.show()
 
     def _get_net_price_avg(self):
         net_price_avg_public = self._data.loc[
