@@ -149,8 +149,7 @@ class FinancialData(Dataset):
         data = {
             'Name': self.college_names,
             'Ownership': self.ownership,
-            'Net_Price_Public': self.net_price_public,
-            'Net_Price_Private': self.net_price_private,
+            'Net_Price': self.net_price,
             'Attendance_Cost': self.attendance_cost,
             'Tuition_In_State': self.tuition_in_state,
             'Tuition_Out_State': self.tuition_out_state,
@@ -174,8 +173,11 @@ class FinancialData(Dataset):
         return pd.DataFrame(data)
 
     def _set_cost_info(self):
-        self.net_price_public = self._dataset['npt4_pub']
-        self.net_price_private = self._dataset['npt4_priv']
+        self.net_price = self._data_processor._list_merge(
+            self._dataset['npt4_pub'],
+            self._dataset['npt4_priv'],
+            self.ownership
+        )
         self.attendance_cost = self._dataset['costt4_a']
         self.tuition_in_state = self._dataset['tuitionfee_in']
         self.tuition_out_state = self._dataset['tuitionfee_out']
