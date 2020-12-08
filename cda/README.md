@@ -1,3 +1,0 @@
-# Python Analysis
-
-Dependencies: Pandas
