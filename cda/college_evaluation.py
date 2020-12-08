@@ -5,5 +5,5 @@ class CollegeEvaluation():
     def __init__(self):
         self._data = CollegeData().get_evaluation_metrics()
 
-    def show_metrics(self):
-        print(self._data)
+    def export_data(self, path='evaluation_data.csv'):
+        self._data.to_csv(path, index=False)

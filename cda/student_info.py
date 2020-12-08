@@ -6,8 +6,8 @@ class StudentInfo():
     def __init__(self):
         self._data = StudentData().get_info()
 
-    def show_data(self):
-        print(self._data)
+    def export_data(self, path='student_data.csv'):
+        self._data.to_csv(path, index=False)
 
     def plot_race_diversity(self):
         categories, numbers = self._get_race_avg()

@@ -6,8 +6,8 @@ class CollegeInfo():
     def __init__(self):
         self._data = CollegeData().get_info()
 
-    def show_data(self):
-        print(self._data)
+    def export_data(self, path='college_data.csv'):
+        self._data.to_csv(path, index=False)
 
     def plot_gender_exclusive_colleges(self):
         categories, numbers = self._get_gender_exclusive_info()

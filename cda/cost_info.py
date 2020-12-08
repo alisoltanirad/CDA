@@ -6,8 +6,8 @@ class CostInfo():
     def __init__(self):
         self._data = FinancialData().get_cost_info()
 
-    def show_data(self):
-        print(self._data)
+    def export_data(self, path='cost_data.csv'):
+        self._data.to_csv(path, index=False)
 
     def plot_net_price_avg(self):
         categories, numbers = self._get_net_price_avg()

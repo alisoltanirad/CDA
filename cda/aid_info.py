@@ -5,8 +5,8 @@ class FinancialAidInfo():
     def __init__(self):
         self._data = FinancialData().get_aid_info()
 
-    def show_data(self):
-        print(self._data['Debt_Dependent'])
+    def export_data(self, path='aid_data.csv'):
+        self._data.to_csv(path, index=False)
 
     def get_avg_debt(self):
         data = {
