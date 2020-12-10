@@ -61,5 +61,5 @@ class MisValueFiller:
 
     def mean(self, list, datatype):
         return list.fillna(
-            datatype(list[list.notnull()].astype(datatype).mean())
+            datatype(list[list.notnull().astype(datatype)].astype(datatype).mean())
         )

@@ -130,20 +130,40 @@ class StudentData(Dataset):
         return pd.DataFrame(data)
 
     def _set_general_info(self):
-        self.part_time_share = self._dataset['pptug_ef']
+        self.part_time_share = self._mis_value_filler.mean(
+            self._dataset['pptug_ef'], float
+        )
 
     def _set_race_info(self):
-        self.race_white = self._dataset['ugds_white']
-        self.race_black = self._dataset['ugds_black']
-        self.race_hispanic = self._dataset['ugds_hisp']
-        self.race_asian = self._dataset['ugds_asian']
-        self.race_aian = self._dataset['ugds_aian']
-        self.race_nhpi = self._dataset['ugds_nhpi']
-        self.race_mixed = self._dataset['ugds_2mor']
+        self.race_white = self._mis_value_filler.mean(
+            self._dataset['ugds_white'], float
+        )
+        self.race_black = self._mis_value_filler.mean(
+            self._dataset['ugds_black'], float
+        )
+        self.race_hispanic = self._mis_value_filler.mean(
+            self._dataset['ugds_hisp'], float
+        )
+        self.race_asian = self._mis_value_filler.mean(
+            self._dataset['ugds_asian'], float
+        )
+        self.race_aian = self._mis_value_filler.mean(
+            self._dataset['ugds_aian'], float
+        )
+        self.race_nhpi = self._mis_value_filler.mean(
+            self._dataset['ugds_nhpi'], float
+        )
+        self.race_mixed = self._mis_value_filler.mean(
+            self._dataset['ugds_2mor'], float
+        )
 
     def _set_family_info(self):
-        self.family_income_dependent = self._dataset['dep_inc_n']
-        self.family_income_independent = self._dataset['ind_inc_n']
+        self.family_income_dependent = self._mis_value_filler.mean(
+            self._dataset['dep_inc_n'], int
+        )
+        self.family_income_independent = self._mis_value_filler.mean(
+            self._dataset['ind_inc_n'], int
+        )
 
 
 class FinancialData(Dataset):
