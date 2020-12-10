@@ -12,7 +12,8 @@ class CollegeInfo():
     def plot_gender_exclusive_colleges(self):
         categories, numbers = self._get_gender_exclusive_info()
 
-        fig, ax = plt.subplots()
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
         ax.bar(categories, numbers)
         plt.title('Gender Exclusive Colleges')
         plt.show()
@@ -20,7 +21,8 @@ class CollegeInfo():
     def plot_highest_degrees(self):
         degrees, numbers = self._get_highest_degrees_info()
 
-        fig, ax = plt.subplots()
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
         ax.pie(numbers, labels=degrees, autopct='%1.1f%%', startangle=90)
         ax.axis('equal')
         plt.title('Colleges Highest Degree Awarded')

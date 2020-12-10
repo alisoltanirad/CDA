@@ -12,7 +12,8 @@ class StudentInfo():
     def plot_race_diversity(self):
         categories, numbers = self._get_race_avg()
 
-        fig, ax = plt.subplots()
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
         ax.bar(categories, numbers)
         plt.title('Students Race Diversity')
         plt.show()
@@ -20,7 +21,8 @@ class StudentInfo():
     def plot_part_time_share(self):
         categories, numbers = self._get_part_time_share_info()
 
-        fig, ax = plt.subplots()
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
         ax.pie(numbers, labels=categories, autopct='%1.1f%%', explode=(0, 0.1))
         ax.axis('equal')
         plt.title('Students Race Diversity')

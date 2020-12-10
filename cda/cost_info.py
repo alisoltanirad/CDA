@@ -12,7 +12,8 @@ class CostInfo():
     def plot_net_price_avg(self):
         categories, numbers = self._get_net_price_avg()
 
-        fig, ax = plt.subplots()
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
         ax.bar(categories, numbers)
         plt.title('Net Price\n (Avg. Attendance Cost Minus Avg. Financial Aid)')
         plt.ylabel('$')

@@ -15,7 +15,8 @@ class CollegeEvaluation():
         tuition = self._college_info['Tuition_Revenue'].astype(float)
         sat_scores = self._evaluation_metrics['SAT_Scores_Overall'].astype(float)
 
-        fig, ax = plt.subplots()
+        fig = plt.figure()
+        ax = fig.add_subplot(1, 1, 1)
         ax.scatter(tuition, sat_scores)
         plt.title('SAT scores correlation with tuition revenue')
         plt.xlabel('Tuition Revenue (Avg.)')
