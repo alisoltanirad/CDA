@@ -1,3 +1,4 @@
+from .college_scorecard import api
 from .dataset_info import DatasetInfo
 from .college_info import CollegeInfo
 from .student_info import StudentInfo

@@ -55,3 +55,11 @@ class DataProcessor:
             '3': True,
         }
         return [is_for_profit[key] for key in keys]
+
+
+class MisValueFiller:
+
+    def mean(self, list, datatype):
+        return list.fillna(
+            datatype(list[list.notnull()].astype(datatype).mean())
+        )

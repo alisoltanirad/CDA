@@ -1,7 +1,7 @@
 # Data source: College Scorecard
 import ssl
 import pandas as pd
-from .data_processing import DataProcessor
+from .data_processing import DataProcessor, MisValueFiller
 
 class Dataset:
 
@@ -11,6 +11,7 @@ class Dataset:
         ssl._create_default_https_context = ssl._create_unverified_context
         self._dataset = pd.read_csv(path, dtype='unicode')
         self._data_processor = DataProcessor()
+        self._mis_value_filler = MisValueFiller()
         self.college_names = self._dataset['instnm']
         self.ownership = self._data_processor._ownership_types(
             self._dataset['control']
@@ -57,10 +58,12 @@ class CollegeData(Dataset):
 
     def _set_general_info(self):
         self.state = self._dataset['stabbr']
-        self.student_size = self._dataset['ugds']
-        self.online_only = self._dataset['distanceonly']
-        self.men_only = self._dataset['menonly']
-        self.women_only = self._dataset['womenonly']
+        self.student_size = self._mis_value_filler.mean(
+            self._dataset['ugds'], int
+        )
+        self.online_only = self._dataset['distanceonly'].fillna('false')
+        self.men_only = self._dataset['menonly'].fillna('false')
+        self.women_only = self._dataset['womenonly'].fillna('false')
         self.religious_affiliate = self._data_processor._is_religious_affiliate(
             self._dataset['relaffil']
         )
@@ -72,10 +75,18 @@ class CollegeData(Dataset):
         )
 
     def _set_fiscal_info(self):
-        self.tuition_revenue = self._dataset['tuitfte']
-        self.instructional_expenditure = self._dataset['inexpfte']
-        self.faculty_salary = self._dataset['avgfacsal']
-        self.faculty_fulltime_rate = self._dataset['pftfac']
+        self.tuition_revenue = self._mis_value_filler.mean(
+            self._dataset['tuitfte'], int
+        )
+        self.instructional_expenditure = self._mis_value_filler.mean(
+            self._dataset['inexpfte'], int
+        )
+        self.faculty_salary = self._mis_value_filler.mean(
+            self._dataset['avgfacsal'], int
+        )
+        self.faculty_fulltime_rate = self._mis_value_filler.mean(
+            self._dataset['pftfac'], float
+        )
 
     def _set_evaluation_metrics(self):
         self.admission_rates = self._dataset['adm_rate']
