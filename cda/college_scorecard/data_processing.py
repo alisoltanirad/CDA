@@ -1,3 +1,6 @@
+import pandas as pd
+
+
 class DataProcessor:
 
     def _list_average(self, lists):
@@ -8,7 +11,7 @@ class DataProcessor:
             for j in range(n_lists):
                 avg_list[i] += lists[j][i]
             avg_list[i] /= n_lists
-        return avg_list
+        return pd.Series(avg_list)
 
     def _list_merge(self, public, private, ownership):
         list_length = len(public)
@@ -18,7 +21,7 @@ class DataProcessor:
                 merged_list[i] = public[i]
             else:
                 merged_list[i] = private[i]
-        return merged_list
+        return pd.Series(merged_list)
 
     def _degree_types(self, keys):
         degree_type = {
@@ -28,7 +31,7 @@ class DataProcessor:
             '3': "Bachelor's degree",
             '4': "Graduate degree",
         }
-        return [degree_type[key] for key in keys]
+        return pd.Series([degree_type[key] for key in keys])
 
     def _ownership_types(self, keys):
         ownership_type = {
@@ -36,7 +39,7 @@ class DataProcessor:
             '2': 'private',
             '3': 'private',
         }
-        return [ownership_type[key] for key in keys]
+        return pd.Series([ownership_type[key] for key in keys])
 
     def _is_religious_affiliate(self, keys):
         is_religious_affiliate = [False for i in range(len(keys))]
@@ -46,7 +49,7 @@ class DataProcessor:
                     is_religious_affiliate[i] = True
             except:
                 pass
-        return is_religious_affiliate
+        return pd.Series(is_religious_affiliate)
 
     def _is_for_profit(self, keys):
         is_for_profit = {
@@ -54,7 +57,7 @@ class DataProcessor:
             '2': False,
             '3': True,
         }
-        return [is_for_profit[key] for key in keys]
+        return pd.Series([is_for_profit[key] for key in keys])
 
 
 class MisValueFiller:
