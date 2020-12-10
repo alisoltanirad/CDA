@@ -204,31 +204,57 @@ class FinancialData(Dataset):
         return pd.DataFrame(data)
 
     def _set_cost_info(self):
-        self.net_price = self._data_processor._list_merge(
-            self._dataset['npt4_pub'],
-            self._dataset['npt4_priv'],
-            self.ownership
+        self.net_price = self._mis_value_filler.mean(
+            self._data_processor._list_merge(
+                self._dataset['npt4_pub'],
+                self._dataset['npt4_priv'],
+                self.ownership
+            ), int
         )
-        self.attendance_cost = self._dataset['costt4_a']
-        self.tuition_in_state = self._dataset['tuitionfee_in']
-        self.tuition_out_state = self._dataset['tuitionfee_out']
+        self.attendance_cost = self._mis_value_filler.mean(
+            self._dataset['costt4_a'], int
+        )
+        self.tuition_in_state = self._mis_value_filler.mean(
+            self._dataset['tuitionfee_in'], int
+        )
+        self.tuition_out_state = self._mis_value_filler.mean(
+            self._dataset['tuitionfee_out'], int
+        )
 
     def _set_aid_info(self):
-        self.title_iv = self._data_processor._list_merge(
-            self._dataset['num4_pub'],
-            self._dataset['num4_priv'],
-            self.ownership
+        self.title_iv = self._mis_value_filler.mean(
+            self._data_processor._list_merge(
+                self._dataset['num4_pub'],
+                self._dataset['num4_priv'],
+                self.ownership
+            ), int
         )
-        self.federal_loan_rate = self._dataset['pctfloan']
-        self.debt_overall = self._dataset['debt_mdn_supp']
-        self.debt_completers = self._dataset['grad_debt_mdn']
-        self.debt_noncompleters = self._dataset['wdraw_debt_mdn']
-        self.debt_dependent = self._dataset['dep_debt_mdn']
-        self.debt_independent = self._dataset['ind_debt_mdn']
+        self.federal_loan_rate = self._mis_value_filler.mean(
+            self._dataset['pctfloan'], float
+        )
+        self.debt_overall = self._mis_value_filler.mean(
+            self._dataset['debt_mdn_supp'], int
+        )
+        self.debt_completers = self._mis_value_filler.mean(
+            self._dataset['grad_debt_mdn'], float
+        )
+        self.debt_noncompleters = self._mis_value_filler.mean(
+            self._dataset['wdraw_debt_mdn'], float
+        )
+        self.debt_dependent = self._mis_value_filler.mean(
+            self._dataset['dep_debt_mdn'], int
+        )
+        self.debt_independent = self._mis_value_filler.mean(
+            self._dataset['ind_debt_mdn'], int
+        )
 
     def _set_family_info(self):
-        self.family_income_dependent = self._dataset['dep_inc_n']
-        self.family_income_independent = self._dataset['ind_inc_n']
+        self.family_income_dependent = self._mis_value_filler.mean(
+            self._dataset['dep_inc_n'], int
+        )
+        self.family_income_independent = self._mis_value_filler.mean(
+            self._dataset['ind_inc_n'], int
+        )
 
 
 class MetaData:
