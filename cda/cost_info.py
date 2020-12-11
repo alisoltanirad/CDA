@@ -1,7 +1,9 @@
 from matplotlib import pyplot as plt
+
 from .college_scorecard import FinancialData
 
-class CostInfo():
+
+class CostInfo:
 
     def __init__(self):
         self._data = FinancialData().get_cost_info()

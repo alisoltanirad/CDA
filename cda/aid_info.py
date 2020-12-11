@@ -1,6 +1,7 @@
 from .college_scorecard import FinancialData
 
-class FinancialAidInfo():
+
+class FinancialAidInfo:
 
     def __init__(self):
         self._data = FinancialData().get_aid_info()

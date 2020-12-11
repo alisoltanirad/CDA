@@ -1,6 +1,7 @@
-from .college_scorecard.api import MetaData
+from .college_scorecard import MetaData
 
-class DatasetInfo():
+
+class DatasetInfo:
 
     def __init__(self):
         self._data = MetaData()

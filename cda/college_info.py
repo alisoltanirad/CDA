@@ -1,7 +1,8 @@
 from matplotlib import pyplot as plt
 from .college_scorecard import CollegeData
 
-class CollegeInfo():
+
+class CollegeInfo:
 
     def __init__(self):
         self._data = CollegeData().get_info()
