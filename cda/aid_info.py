@@ -3,10 +3,13 @@ from .college_scorecard import FinancialData
 
 class FinancialAidInfo:
 
-    def __init__(self):
-        self._data = FinancialData().get_aid_info()
+    def __init__(self, path):
+        self._data = FinancialData(path).get_aid_info()
 
-    def export_data(self, path='aid_data.csv'):
+    def get(self):
+        return self._data
+
+    def export(self, path='aid_data.csv'):
         self._data.to_csv(path, index=False)
 
     def get_avg_debt(self):

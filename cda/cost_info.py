@@ -5,10 +5,13 @@ from .college_scorecard import FinancialData
 
 class CostInfo:
 
-    def __init__(self):
-        self._data = FinancialData().get_cost_info()
+    def __init__(self, path):
+        self._data = FinancialData(path).get_cost_info()
 
-    def export_data(self, path='cost_data.csv'):
+    def get(self):
+        return self._data
+
+    def export(self, path='cost_data.csv'):
         self._data.to_csv(path, index=False)
 
     def plot_net_price_avg(self):

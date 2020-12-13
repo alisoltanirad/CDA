@@ -3,8 +3,8 @@ from .college_scorecard import MetaData
 
 class DatasetInfo:
 
-    def __init__(self):
-        self._data = MetaData()
+    def __init__(self, path):
+        self._data = MetaData(path)
 
-    def show_attributes(self):
-        print('Attributes:\n', self._data.get_attribute_names())
+    def get_attribute_names(self):
+        return self._data.get_attribute_names()

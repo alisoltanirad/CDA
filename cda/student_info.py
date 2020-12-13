@@ -2,12 +2,16 @@ from matplotlib import pyplot as plt
 
 from .college_scorecard import StudentData
 
+
 class StudentInfo:
 
-    def __init__(self):
-        self._data = StudentData().get_info()
+    def __init__(self, path):
+        self._data = StudentData(path).get_info()
 
-    def export_data(self, path='student_data.csv'):
+    def get(self):
+        return self._data
+
+    def export(self, path='student_data.csv'):
         self._data.to_csv(path, index=False)
 
     def plot_race_diversity(self):

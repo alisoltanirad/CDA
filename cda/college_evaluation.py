@@ -5,12 +5,15 @@ from .college_scorecard import CollegeData
 
 class CollegeEvaluation:
 
-    def __init__(self):
-        self._college_data = CollegeData()
+    def __init__(self, path):
+        self._college_data = CollegeData(path)
         self._college_info = self._college_data.get_info()
         self._evaluation_metrics = self._college_data.get_evaluation_metrics()
 
-    def export_data(self, path='evaluation_data.csv'):
+    def get(self):
+        return self._college_info, self._evaluation_metrics
+
+    def export(self, path='evaluation_data.csv'):
         self._evaluation_metrics.to_csv(path, index=False)
 
     def plot_tuition_sat(self):

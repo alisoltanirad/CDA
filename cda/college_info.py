@@ -4,10 +4,13 @@ from .college_scorecard import CollegeData
 
 class CollegeInfo:
 
-    def __init__(self):
-        self._data = CollegeData().get_info()
+    def __init__(self, path):
+        self._data = CollegeData(path).get_info()
 
-    def export_data(self, path='college_data.csv'):
+    def get(self):
+        return self._data
+
+    def export(self, path='college_data.csv'):
         self._data.to_csv(path, index=False)
 
     def plot_gender_exclusive_colleges(self):
