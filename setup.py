@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="CDA",
+    name="cda",
     version="0.1.0",
     description="College Data Analysis",
     long_description=long_description,
