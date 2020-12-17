@@ -20,20 +20,37 @@ class StudentInfo:
     def plot_race_diversity(self):
         categories, numbers = self._get_race_avg()
 
+        plt.style.use('seaborn-talk')
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)
         ax.bar(categories, numbers)
-        plt.title('Students Race Diversity')
+        fig.canvas.draw()
+
+        n_yticks = len(plt.yticks()[1])
+        yticklabels = [
+            ''.join([str(i * 10), '%']) for i in range(n_yticks)
+        ]
+        yticklabels[0] = ''
+        ax.set_yticklabels(yticklabels)
+
+        for i, h in enumerate(numbers):
+            ax.text(
+                i, h + 0.5, ''.join([str(numbers[i]), '%']),
+                fontsize=13, horizontalalignment='center'
+            )
+
+        ax.set_title('Students Race Diversity')
         plt.show()
 
     def plot_part_time_share(self):
         categories, numbers = self._get_part_time_share_info()
 
+        plt.style.use('seaborn-talk')
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)
         ax.pie(numbers, labels=categories, autopct='%1.1f%%', explode=(0, 0.1))
         ax.axis('equal')
-        plt.title('Students Race Diversity')
+        ax.set_title('Students Race Diversity')
         plt.show()
 
     def _get_race_avg(self):
@@ -48,7 +65,10 @@ class StudentInfo:
         categories = [
             'White', 'Black', 'Hispanic', 'Asian', 'AIAN', 'NHPI', 'Mixed'
         ]
-        numbers = [white, black, hispanic, asian, aian, nhpi, mixed]
+        numbers = [float('{:.2f}'.format(number))
+                   for number in
+                   [white, black, hispanic, asian, aian, nhpi, mixed]
+        ]
 
         return categories, numbers
 
