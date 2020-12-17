@@ -3,8 +3,11 @@ from .college_scorecard import FinancialData
 
 class FinancialAidInfo:
 
-    def __init__(self, path):
-        self._data = FinancialData(path).get_aid_info()
+    def __init__(self, path=None):
+        if path == None:
+            self._data = FinancialData().get_aid_info()
+        else:
+            self._data = FinancialData(path).get_aid_info()
 
     def get(self):
         return self._data

@@ -5,8 +5,11 @@ from .college_scorecard import StudentData
 
 class StudentInfo:
 
-    def __init__(self, path):
-        self._data = StudentData(path).get_info()
+    def __init__(self, path=None):
+        if path == None:
+            self._data = StudentData().get_info()
+        else:
+            self._data = StudentData(path).get_info()
 
     def get(self):
         return self._data
