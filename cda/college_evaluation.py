@@ -23,9 +23,19 @@ class CollegeEvaluation:
         tuition = self._college_info['Tuition_Revenue'].astype(float)
         sat_scores = self._evaluation_metrics['SAT_Scores_Overall'].astype(float)
 
+        plt.style.use('seaborn-talk')
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)
         ax.scatter(tuition, sat_scores)
+        fig.canvas.draw()
+
+        n_xticks = len(plt.xticks()[1])
+        xticklabels = [
+            ''.join(['$', str((i - 1) * 10000)]) for i in range(n_xticks)
+        ]
+        xticklabels[0], xticklabels[1] = '', '0'
+        ax.set_xticklabels(xticklabels)
+
         plt.title('SAT scores correlation with tuition revenue')
         plt.xlabel('Tuition Revenue (Avg.)')
         plt.ylabel('SAT Scores (Overall)')
