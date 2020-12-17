@@ -4,8 +4,11 @@ from .college_scorecard import CollegeData
 
 class CollegeInfo:
 
-    def __init__(self, path):
-        self._data = CollegeData(path).get_info()
+    def __init__(self, path=None):
+        if path == None:
+            self._data = CollegeData().get_info()
+        else:
+            self._data = CollegeData(path).get_info()
 
     def get(self):
         return self._data
@@ -16,20 +19,27 @@ class CollegeInfo:
     def plot_gender_exclusive_colleges(self):
         categories, numbers = self._get_gender_exclusive_info()
 
+        plt.style.use('seaborn-talk')
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)
         ax.bar(categories, numbers)
-        plt.title('Gender Exclusive Colleges')
+        for i, h in enumerate(numbers):
+            ax.text(
+                i, h + 100, numbers[i],
+                fontsize=13, horizontalalignment='center'
+            )
+        ax.set_title('Gender Exclusive Colleges')
         plt.show()
 
     def plot_highest_degrees(self):
         degrees, numbers = self._get_highest_degrees_info()
 
+        plt.style.use('seaborn-talk')
         fig = plt.figure()
         ax = fig.add_subplot(1, 1, 1)
         ax.pie(numbers, labels=degrees, autopct='%1.1f%%', startangle=90)
         ax.axis('equal')
-        plt.title('Colleges Highest Degree Awarded')
+        ax.set_title('Colleges Highest Degree Awarded')
         plt.show()
 
     def _get_gender_exclusive_info(self):
